@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import Layout from '../components/Layout';
 import ChatWindow from '../components/ChatWindow';
 import InputBox from '../components/InputBox';
+import SettingsPanel from '../components/SettingsPanel';
 
 export default function Home() {
   const [messages, setMessages] = useState([
@@ -21,10 +23,13 @@ export default function Home() {
   };
 
   return (
-    <div className="h-screen flex flex-col">
-      <ChatWindow messages={messages} />
-      <InputBox onSend={sendMessage} />
-    </div>
+    <Layout>
+      <SettingsPanel />
+      <div className="h-full flex flex-col bg-black bg-opacity-40">
+        <ChatWindow messages={messages} />
+        <InputBox onSend={sendMessage} />
+      </div>
+    </Layout>
   );
 }
 
