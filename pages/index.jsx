@@ -1,35 +1,12 @@
-import { useState } from 'react';
-import Layout from '../components/Layout';
-import ChatWindow from '../components/ChatWindow';
-import InputBox from '../components/InputBox';
-import SettingsPanel from '../components/SettingsPanel';
+import Link from 'next/link';
 
 export default function Home() {
-  const [messages, setMessages] = useState([
-    { role: 'server', text: 'サーバーの返答を表示' }
-  ]);
-
-  const sendMessage = async (text) => {
-    setMessages((prev) => [...prev, { role: 'user', text }]);
-
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      body: JSON.stringify({ text }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    const data = await res.json();
-
-    setMessages((prev) => [...prev, { role: 'server', text: data.reply }]);
-  };
-
   return (
-    <Layout>
-      <SettingsPanel />
-      <div className="h-full flex flex-col bg-black bg-opacity-40">
-        <ChatWindow messages={messages} />
-        <InputBox onSend={sendMessage} />
-      </div>
-    </Layout>
+    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
+      <h1 className="text-4xl font-bold mb-4">AI 圧Q就活</h1>
+      <Link href="/interview" className="px-6 py-3 bg-blue-500 text-white rounded hover:bg-blue-600">
+        面接開始
+      </Link>
+    </div>
   );
 }
-
